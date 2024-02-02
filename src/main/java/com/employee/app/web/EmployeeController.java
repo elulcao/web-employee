@@ -57,7 +57,7 @@ public class EmployeeController {
 
   @POST
   @Path("/add")
-  @RolesAllowed({ "ADMIN" })
+  @RolesAllowed({"ADMIN"})
   public Response createEmployee(Employee employee, @Auth User user) throws URISyntaxException {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
@@ -65,7 +65,8 @@ public class EmployeeController {
     if (violations.size() > 0) {
       ArrayList<String> validationMessages = new ArrayList<String>();
       for (ConstraintViolation<Employee> violation : violations) {
-        validationMessages.add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
+        validationMessages
+            .add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
       }
       return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
     }
@@ -81,15 +82,16 @@ public class EmployeeController {
   @PUT
   @Path("/{id}")
   @PermitAll
-  public Response updateEmployeeById(@PathParam("id") Integer id, Employee employee, @Auth User user) {
+  public Response updateEmployeeById(@PathParam("id") Integer id, Employee employee,
+      @Auth User user) {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
     Employee e = repository.getEmployee(employee.getId());
     if (violations.size() > 0) {
       ArrayList<String> validationMessages = new ArrayList<String>();
       for (ConstraintViolation<Employee> violation : violations) {
-        validationMessages.add(
-            violation.getPropertyPath().toString() + ": " + violation.getMessage());
+        validationMessages
+            .add(violation.getPropertyPath().toString() + ": " + violation.getMessage());
       }
       return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
     }
@@ -104,7 +106,7 @@ public class EmployeeController {
 
   @DELETE
   @Path("/{id}")
-  @RolesAllowed({ "ADMIN" })
+  @RolesAllowed({"ADMIN"})
   public Response removeEmployeeById(@PathParam("id") Integer id, @Auth User user) {
     Employee employee = repository.getEmployee(id);
     if (employee != null) {

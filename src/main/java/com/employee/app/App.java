@@ -26,16 +26,14 @@ public class App extends Application<ApplicationConfiguration> {
   private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
   @Override
-  public void initialize(Bootstrap<ApplicationConfiguration> b) {
-  }
+  public void initialize(Bootstrap<ApplicationConfiguration> b) {}
 
   @Override
   public void run(ApplicationConfiguration c, Environment e) throws Exception {
 
     LOGGER.info("Registering Jersey Client");
-    final Client client = new JerseyClientBuilder(e)
-        .using(c.getJerseyClientConfiguration())
-        .build(getName());
+    final Client client =
+        new JerseyClientBuilder(e).using(c.getJerseyClientConfiguration()).build(getName());
     e.jersey().register(new APIController(client));
 
     LOGGER.info("Registering REST resources");
@@ -45,19 +43,16 @@ public class App extends Application<ApplicationConfiguration> {
     e.healthChecks().register("application", new ApplicationHealthCheck(client));
 
     /*
-     * LOGGER.info("Registering Apache HttpClient");
-     * final HttpClient httpClient = new HttpClientBuilder(e)
-     * .using(c.getHttpClientConfiguration())
-     * .build(getName());
+     * LOGGER.info("Registering Apache HttpClient"); final HttpClient httpClient = new
+     * HttpClientBuilder(e) .using(c.getHttpClientConfiguration()) .build(getName());
      * e.jersey().register(new APIController(httpClient));
      */
 
     // ****** Dropwizard security - custom classes ***********/
-    e.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
-        .setAuthenticator(new AppBasicAuthenticator())
-        .setAuthorizer(new AppAuthorizer())
-        .setRealm("BASIC-AUTH-REALM")
-        .buildAuthFilter()));
+    e.jersey()
+        .register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
+            .setAuthenticator(new AppBasicAuthenticator()).setAuthorizer(new AppAuthorizer())
+            .setRealm("BASIC-AUTH-REALM").buildAuthFilter()));
     e.jersey().register(RolesAllowedDynamicFeature.class);
     e.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
   }
