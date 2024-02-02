@@ -8,6 +8,7 @@ import java.util.Set;
 import com.employee.app.auth.User;
 import com.employee.app.model.Employee;
 import com.employee.app.repository.EmployeeRepository;
+import com.employee.app.resources.Constants;
 
 import io.dropwizard.auth.Auth;
 import jakarta.annotation.security.PermitAll;
@@ -57,7 +58,7 @@ public class EmployeeController {
 
   @POST
   @Path("/add")
-  @RolesAllowed({"ADMIN"})
+  @RolesAllowed({Constants.ADMIN})
   public Response createEmployee(Employee employee, @Auth User user) throws URISyntaxException {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
@@ -106,7 +107,7 @@ public class EmployeeController {
 
   @DELETE
   @Path("/{id}")
-  @RolesAllowed({"ADMIN"})
+  @RolesAllowed({Constants.ADMIN})
   public Response removeEmployeeById(@PathParam("id") Integer id, @Auth User user) {
     Employee employee = repository.getEmployee(id);
     if (employee != null) {
