@@ -6,5 +6,5 @@ logging:
   appenders:
     - type: console
       threshold: INFO
-      logFormat: "%-5level [%date{ISO8601}] [%thread]  %c: %msg%n"
+      logFormat: "%-5level [%date{ISO8601}] [%thread] %c: %msg%n"
       timeZone: UTC

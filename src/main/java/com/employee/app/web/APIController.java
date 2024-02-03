@@ -30,8 +30,7 @@ public class APIController {
     WebTarget webTarget = jerseyClient.target("http://localhost:8080/employees");
     Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
     Response response = invocationBuilder.get();
-    ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {
-    });
+    ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {});
     return employees.toString();
   }
 

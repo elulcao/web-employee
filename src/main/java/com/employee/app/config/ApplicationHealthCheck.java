@@ -2,10 +2,8 @@ package com.employee.app.config;
 
 import java.util.ArrayList;
 import java.util.Base64;
-
 import com.codahale.metrics.health.HealthCheck;
 import com.employee.app.model.Employee;
-
 import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.ProcessingException;
 import jakarta.ws.rs.WebApplicationException;
@@ -40,8 +38,8 @@ public class ApplicationHealthCheck extends HealthCheck {
       if (response.getStatus() != 200) {
         return Result.unhealthy("API Failed with status: " + response.getStatus());
       }
-      ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {
-      });
+      ArrayList<Employee> employees =
+          response.readEntity(new GenericType<ArrayList<Employee>>() {});
       if (employees != null && !employees.isEmpty()) {
         return Result.healthy();
       }
