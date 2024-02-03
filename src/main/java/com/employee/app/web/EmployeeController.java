@@ -64,7 +64,6 @@ public class EmployeeController {
       throws URISyntaxException {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
-    Employee e = repository.getEmployee(employee.getId());
     if (violations.size() > 0) {
       ArrayList<String> validationMessages = new ArrayList<String>();
       for (ConstraintViolation<Employee> violation : violations) {
@@ -73,6 +72,7 @@ public class EmployeeController {
       }
       return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
     }
+    Employee e = repository.getEmployee(employee.getId());
     if (e != null) {
       return Response.status(Status.CONFLICT).entity("Employee already exists").build();
     } else {
@@ -89,7 +89,6 @@ public class EmployeeController {
       @Auth User user) {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
-    Employee e = repository.getEmployee(employee.getId());
     if (violations.size() > 0) {
       ArrayList<String> validationMessages = new ArrayList<String>();
       for (ConstraintViolation<Employee> violation : violations) {
@@ -98,12 +97,13 @@ public class EmployeeController {
       }
       return Response.status(Status.BAD_REQUEST).entity(validationMessages).build();
     }
+    Employee e = repository.getEmployee(employee.getId());
     if (e != null) {
       employee.setId(id);
       repository.updateEmployee(id, employee);
       return Response.ok(employee).build();
     } else {
-      return Response.status(Status.NOT_FOUND).build();
+      return Response.status(Status.NOT_FOUND).entity(id).build();
     }
   }
 
@@ -116,7 +116,7 @@ public class EmployeeController {
       repository.removeEmployee(id);
       return Response.ok().build();
     } else {
-      return Response.status(Status.NOT_FOUND).build();
+      return Response.status(Status.NOT_FOUND).entity(id).build();
     }
   }
 }
