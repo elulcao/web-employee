@@ -59,7 +59,7 @@ public class EmployeeController {
 
   @POST
   @Path("/add")
-  @RolesAllowed({Constants.ADMIN})
+  @RolesAllowed({ Constants.ADMIN })
   public Response createEmployee(@NotNull Employee employee, @Auth User user)
       throws URISyntaxException {
     // validation
@@ -109,7 +109,7 @@ public class EmployeeController {
 
   @DELETE
   @Path("/{id}")
-  @RolesAllowed({Constants.ADMIN})
+  @RolesAllowed({ Constants.ADMIN })
   public Response removeEmployeeById(@PathParam("id") Integer id, @Auth User user) {
     Employee employee = repository.getEmployee(id);
     if (employee != null) {

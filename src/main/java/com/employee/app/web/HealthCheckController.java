@@ -6,7 +6,6 @@ import java.util.Set;
 import com.codahale.metrics.health.HealthCheck.Result;
 import com.codahale.metrics.health.HealthCheckRegistry;
 
-import jakarta.annotation.security.PermitAll;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
@@ -23,7 +22,6 @@ public class HealthCheckController {
   }
 
   @GET
-  @PermitAll
   public Set<Entry<String, Result>> getStatus() {
     return registry.runHealthChecks().entrySet();
   }

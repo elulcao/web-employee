@@ -1,6 +1,7 @@
 package com.employee.app.config;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.core.Configuration;

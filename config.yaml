@@ -1,4 +1,10 @@
 logging:
   level: INFO
   loggers:
-    com.employee: DEBUG
+    com.employee.app: INFO
+
+  appenders:
+    - type: console
+      threshold: INFO
+      logFormat: "%-5level [%date{ISO8601}] [%thread]  %c: %msg%n"
+      timeZone: UTC

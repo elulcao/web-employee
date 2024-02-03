@@ -1,6 +1,7 @@
 package com.employee.app.auth;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
+
 import io.dropwizard.auth.Authorizer;
 import jakarta.ws.rs.container.ContainerRequestContext;
 
