@@ -14,6 +14,10 @@ public class ApplicationConfiguration extends Configuration {
   @NotNull
   private HttpClientConfiguration httpClient = new HttpClientConfiguration();
 
+  @Valid
+  @NotNull
+  private JerseyClientConfiguration jerseyClient = new JerseyClientConfiguration();
+
   @JsonProperty("httpClient")
   public HttpClientConfiguration getHttpClientConfiguration() {
     return httpClient;
@@ -23,10 +27,6 @@ public class ApplicationConfiguration extends Configuration {
   public void setHttpClientConfiguration(HttpClientConfiguration httpClient) {
     this.httpClient = httpClient;
   }
-
-  @Valid
-  @NotNull
-  private JerseyClientConfiguration jerseyClient = new JerseyClientConfiguration();
 
   @JsonProperty("jerseyClient")
   public JerseyClientConfiguration getJerseyClientConfiguration() {

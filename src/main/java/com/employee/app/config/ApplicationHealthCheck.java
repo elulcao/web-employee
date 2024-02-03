@@ -40,8 +40,8 @@ public class ApplicationHealthCheck extends HealthCheck {
       if (response.getStatus() != 200) {
         return Result.unhealthy("API Failed with status: " + response.getStatus());
       }
-      ArrayList<Employee> employees =
-          response.readEntity(new GenericType<ArrayList<Employee>>() {});
+      ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {
+      });
       if (employees != null && !employees.isEmpty()) {
         return Result.healthy();
       }

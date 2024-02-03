@@ -51,13 +51,8 @@ public class App extends Application<ApplicationConfiguration> {
     LOGGER.info("Registering Application Health Check");
     environment.healthChecks().register("application", new ApplicationHealthCheck(client));
 
-    /*
-     * LOGGER.info("Registering Apache HttpClient"); final HttpClient httpClient = new
-     * HttpClientBuilder(e) .using(c.getHttpClientConfiguration()) .build(getName());
-     * e.jersey().register(new APIController(httpClient));
-     */
-
     // ****** Dropwizard security - custom classes ***********/
+    LOGGER.info("Registering Dropwizard security");
     environment.jersey()
         .register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
             .setAuthenticator(new AppBasicAuthenticator()).setAuthorizer(new AppAuthorizer())
