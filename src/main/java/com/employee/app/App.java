@@ -18,6 +18,8 @@ import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.client.JerseyClientBuilder;
+import io.dropwizard.configuration.EnvironmentVariableSubstitutor;
+import io.dropwizard.configuration.SubstitutingSourceProvider;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
 import io.dropwizard.core.setup.Environment;
@@ -28,7 +30,10 @@ public class App extends Application<ApplicationConfiguration> {
   private static final Logger LOGGER = LoggerFactory.getLogger(App.class);
 
   @Override
-  public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {}
+  public void initialize(Bootstrap<ApplicationConfiguration> bootstrap) {
+    bootstrap.setConfigurationSourceProvider(new SubstitutingSourceProvider(
+        bootstrap.getConfigurationSourceProvider(), new EnvironmentVariableSubstitutor(true)));
+  }
 
   @Override
   public void run(ApplicationConfiguration configuration, Environment environment)

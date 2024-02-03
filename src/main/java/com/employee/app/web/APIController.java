@@ -10,6 +10,7 @@ import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.client.Client;
 import jakarta.ws.rs.client.Invocation;
 import jakarta.ws.rs.client.WebTarget;
+import jakarta.ws.rs.core.GenericType;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
@@ -24,13 +25,12 @@ public class APIController {
 
   @GET
   @Path("/employees")
-  @SuppressWarnings("unchecked")
   public String getEmployees() {
     // Do not hard code the path in your application
     WebTarget webTarget = jerseyClient.target("http://localhost:8080/employees");
     Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
     Response response = invocationBuilder.get();
-    ArrayList<Employee> employees = response.readEntity(ArrayList.class);
+    ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {});
     return employees.toString();
   }
 

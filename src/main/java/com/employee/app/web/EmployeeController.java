@@ -15,6 +15,7 @@ import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import jakarta.validation.constraints.NotNull;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -59,7 +60,8 @@ public class EmployeeController {
   @POST
   @Path("/add")
   @RolesAllowed({Constants.ADMIN})
-  public Response createEmployee(Employee employee, @Auth User user) throws URISyntaxException {
+  public Response createEmployee(@NotNull Employee employee, @Auth User user)
+      throws URISyntaxException {
     // validation
     Set<ConstraintViolation<Employee>> violations = validator.validate(employee);
     Employee e = repository.getEmployee(employee.getId());
