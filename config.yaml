@@ -1,6 +1,14 @@
 api:
   url: http://localhost:8080/employees
 
+jerseyClient:
+  minThreads: 1
+  maxThreads: 128
+  workQueueSize: 8
+  gzipEnabled: true
+  gzipEnabledForRequests: true
+  chunkedEncodingEnabled: true
+
 logging:
   level: INFO
   loggers:
