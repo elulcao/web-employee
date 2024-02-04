@@ -14,16 +14,16 @@ import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("client-root-path")
-public class APIController {
+public class ApiController {
 
   private Client jerseyClient;
   private ApplicationConfiguration configuration;
 
-  public APIController() {
+  public ApiController() {
     super();
   }
 
-  public APIController(ApplicationConfiguration configuration, Client jerseyClient) {
+  public ApiController(ApplicationConfiguration configuration, Client jerseyClient) {
     this.jerseyClient = jerseyClient;
     this.configuration = configuration;
   }
@@ -31,7 +31,7 @@ public class APIController {
   @GET
   @Path("/employees")
   public String getEmployees() {
-    WebTarget webTarget = jerseyClient.target(configuration.getApiUrl());
+    WebTarget webTarget = jerseyClient.target(configuration.getApi().getUrl());
     Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
     Response response = invocationBuilder.get();
     ArrayList<Employee> employees = response.readEntity(new GenericType<ArrayList<Employee>>() {});
@@ -41,7 +41,7 @@ public class APIController {
   @GET
   @Path("/employees/{id}")
   public String getEmployeeById(@PathParam("id") int id) {
-    WebTarget webTarget = jerseyClient.target(configuration.getApiUrl() + id);
+    WebTarget webTarget = jerseyClient.target(configuration.getApi().getUrl() + id);
     Invocation.Builder invocationBuilder = webTarget.request(MediaType.APPLICATION_JSON);
     Response response = invocationBuilder.get();
     Employee employee = response.readEntity(Employee.class);

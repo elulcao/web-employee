@@ -1,5 +1,6 @@
 package com.employee.app.model;
 
+import org.checkerframework.common.value.qual.IntRangeFromPositive;
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotNull;
@@ -14,6 +15,7 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
   @NotNull
+  @Pattern(regexp = "[0-9]+")
   private Integer id;
 
   @NotNull

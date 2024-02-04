@@ -30,7 +30,7 @@ public class ApplicationHealthCheck extends HealthCheck {
   @PermitAll
   protected Result check() throws Exception {
     try {
-      WebTarget webTarget = client.target(configuration.getApiUrl());
+      WebTarget webTarget = client.target(configuration.getApi().getUrl());
       String authString = "admin" + ":" + "password";
       String authStringEnc = Base64.getEncoder().encodeToString(authString.getBytes());
 

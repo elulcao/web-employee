@@ -10,7 +10,7 @@ import com.employee.app.configuration.ApplicationConfiguration;
 import com.employee.app.configuration.ApplicationHealthCheck;
 import com.employee.app.repository.EmployeeRepository;
 import com.employee.app.resources.Constants;
-import com.employee.app.web.APIController;
+import com.employee.app.web.ApiController;
 import com.employee.app.web.EmployeeController;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
@@ -51,7 +51,7 @@ public class App extends Application<ApplicationConfiguration> {
     LOGGER.info("Registering Jersey Client");
     final Client client = new JerseyClientBuilder(environment)
         .using(configuration.getJerseyClientConfiguration()).build(getName());
-    environment.jersey().register(new APIController(configuration, client));
+    environment.jersey().register(new ApiController(configuration, client));
     return client;
   }
 
