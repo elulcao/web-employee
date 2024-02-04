@@ -18,7 +18,7 @@ public class Employee {
 
   @NotNull
   @Length(min = 2, max = 255)
-  private String firstName;
+  private String name;
 
   @NotNull
   @Length(min = 2, max = 255)

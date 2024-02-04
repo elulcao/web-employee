@@ -17,7 +17,7 @@ import jakarta.ws.rs.core.Response;
 public class APIController {
 
   private Client jerseyClient;
-  private final ApplicationConfiguration configuration;
+  private ApplicationConfiguration configuration;
 
   public APIController(ApplicationConfiguration configuration, Client jerseyClient) {
     this.jerseyClient = jerseyClient;

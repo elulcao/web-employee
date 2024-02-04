@@ -8,7 +8,6 @@ import com.employee.app.authorization.User;
 import com.employee.app.model.Employee;
 import com.employee.app.repository.EmployeeRepository;
 import com.employee.app.resources.Constants;
-
 import io.dropwizard.auth.Auth;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
@@ -32,6 +31,10 @@ public class EmployeeController {
 
   private Validator validator;
   private EmployeeRepository repository;
+
+  public EmployeeController() {
+    super();
+  }
 
   public EmployeeController(Validator validator, EmployeeRepository repository) {
     this.validator = validator;

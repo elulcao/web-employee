@@ -17,6 +17,10 @@ public class HealthCheckController {
 
   private HealthCheckRegistry registry;
 
+  public HealthCheckController() {
+    super();
+  }
+
   public HealthCheckController(HealthCheckRegistry registry) {
     this.registry = registry;
   }
