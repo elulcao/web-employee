@@ -4,8 +4,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Set;
-
-import com.employee.app.auth.User;
+import com.employee.app.authorization.User;
 import com.employee.app.model.Employee;
 import com.employee.app.repository.EmployeeRepository;
 import com.employee.app.resources.Constants;

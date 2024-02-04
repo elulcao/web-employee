@@ -1,4 +1,4 @@
-package com.employee.app.config;
+package com.employee.app.configuration;
 
 import java.util.ArrayList;
 import java.util.Base64;
@@ -18,17 +18,19 @@ import jakarta.ws.rs.core.Response;
 public class ApplicationHealthCheck extends HealthCheck {
 
   private final Client client;
+  private final ApplicationConfiguration configuration;
 
-  public ApplicationHealthCheck(Client client) {
+  public ApplicationHealthCheck(ApplicationConfiguration configuration, Client client) {
     super();
     this.client = client;
+    this.configuration = configuration;
   }
 
   @Override
   @PermitAll
   protected Result check() throws Exception {
     try {
-      WebTarget webTarget = client.target("http://localhost:8080/employees");
+      WebTarget webTarget = client.target(configuration.getApiUrl());
       String authString = "admin" + ":" + "password";
       String authStringEnc = Base64.getEncoder().encodeToString(authString.getBytes());
 

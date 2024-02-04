@@ -1,12 +1,12 @@
-package com.employee.app.config;
+package com.employee.app.configuration;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-
 import io.dropwizard.client.HttpClientConfiguration;
 import io.dropwizard.client.JerseyClientConfiguration;
 import io.dropwizard.core.Configuration;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
 public class ApplicationConfiguration extends Configuration {
 
@@ -36,5 +36,19 @@ public class ApplicationConfiguration extends Configuration {
   @JsonProperty("jerseyClient")
   public void setJerseyClientConfiguration(JerseyClientConfiguration jerseyClient) {
     this.jerseyClient = jerseyClient;
+  }
+
+  @Getter
+  @Valid
+  @NotNull
+  @JsonProperty("api")
+  private ApiConfiguration api;
+
+  public ApplicationConfiguration() {
+    super();
+  }
+
+  public String getApiUrl() {
+    return api.getUrl();
   }
 }

@@ -3,17 +3,15 @@ package com.employee.app;
 import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.employee.app.auth.AppAuthorizer;
-import com.employee.app.auth.AppBasicAuthenticator;
-import com.employee.app.auth.User;
-import com.employee.app.config.ApplicationConfiguration;
-import com.employee.app.config.ApplicationHealthCheck;
+import com.employee.app.authorization.AppAuthorizer;
+import com.employee.app.authorization.AppBasicAuthenticator;
+import com.employee.app.authorization.User;
+import com.employee.app.configuration.ApplicationConfiguration;
+import com.employee.app.configuration.ApplicationHealthCheck;
 import com.employee.app.repository.EmployeeRepository;
 import com.employee.app.resources.Constants;
 import com.employee.app.web.APIController;
 import com.employee.app.web.EmployeeController;
-
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
@@ -42,14 +40,15 @@ public class App extends Application<ApplicationConfiguration> {
     LOGGER.info("Registering Jersey Client");
     final Client client = new JerseyClientBuilder(environment)
         .using(configuration.getJerseyClientConfiguration()).build(getName());
-    environment.jersey().register(new APIController(client));
+    environment.jersey().register(new APIController(configuration, client));
 
     LOGGER.info("Registering REST resources");
     environment.jersey()
         .register(new EmployeeController(environment.getValidator(), new EmployeeRepository()));
 
     LOGGER.info("Registering Application Health Check");
-    environment.healthChecks().register("application", new ApplicationHealthCheck(client));
+    environment.healthChecks().register("application",
+        new ApplicationHealthCheck(configuration, client));
 
     // ****** Dropwizard security - custom classes ***********/
     LOGGER.info("Registering Dropwizard security");

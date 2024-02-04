@@ -1,4 +1,4 @@
-package com.employee.app.auth;
+package com.employee.app.authorization;
 
 import java.util.Map;
 import java.util.Optional;

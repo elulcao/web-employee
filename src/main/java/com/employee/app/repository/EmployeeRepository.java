@@ -3,14 +3,15 @@ package com.employee.app.repository;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import com.employee.app.model.Employee;
 
 public class EmployeeRepository {
 
-  public static HashMap<Integer, Employee> employees = new HashMap<>();
+  public static HashMap<Integer, Employee> employees;
 
-  static {
+  public EmployeeRepository() {
+    super();
+    employees = new HashMap<Integer, Employee>();
     employees.put(1, new Employee(1, "John", "Doe", "jhon.doe@email.com"));
   }
 

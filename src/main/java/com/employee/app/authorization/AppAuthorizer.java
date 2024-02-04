@@ -1,4 +1,4 @@
-package com.employee.app.auth;
+package com.employee.app.authorization;
 
 import org.checkerframework.checker.nullness.qual.Nullable;
 
