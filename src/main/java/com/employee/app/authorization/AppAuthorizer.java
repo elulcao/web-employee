@@ -6,6 +6,10 @@ import jakarta.ws.rs.container.ContainerRequestContext;
 
 public class AppAuthorizer implements Authorizer<User> {
 
+  public AppAuthorizer() {
+    super();
+  }
+
   @Override
   public boolean authorize(User user, String role,
       @Nullable ContainerRequestContext containerRequestContext) {

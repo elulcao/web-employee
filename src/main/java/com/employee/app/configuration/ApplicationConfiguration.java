@@ -10,6 +10,10 @@ import lombok.Getter;
 
 public class ApplicationConfiguration extends Configuration {
 
+  public ApplicationConfiguration() {
+    super();
+  }
+
   @Valid
   @NotNull
   private HttpClientConfiguration httpClient = new HttpClientConfiguration();
@@ -43,10 +47,6 @@ public class ApplicationConfiguration extends Configuration {
   @NotNull
   @JsonProperty("api")
   private ApiConfiguration api;
-
-  public ApplicationConfiguration() {
-    super();
-  }
 
   public String getApiUrl() {
     return api.getUrl();

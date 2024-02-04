@@ -19,6 +19,10 @@ public class APIController {
   private Client jerseyClient;
   private ApplicationConfiguration configuration;
 
+  public APIController() {
+    super();
+  }
+
   public APIController(ApplicationConfiguration configuration, Client jerseyClient) {
     this.jerseyClient = jerseyClient;
     this.configuration = configuration;

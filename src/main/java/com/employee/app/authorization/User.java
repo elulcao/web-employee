@@ -8,6 +8,12 @@ public class User implements Principal {
   private final String name;
   private final Set<String> roles;
 
+  public User() {
+    super();
+    this.name = null;
+    this.roles = null;
+  }
+
   public User(String name) {
     this.name = name;
     this.roles = null;

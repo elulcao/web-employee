@@ -4,8 +4,11 @@ package:
 build:
 	mvn clean package
 
+test:
+	mvn test
+
 run: package
 	java -jar target/Employee-1.0-SNAPSHOT.jar server config.yaml
 
-check:
+check: package
 	java -jar target/Employee-1.0-SNAPSHOT.jar check config.yaml

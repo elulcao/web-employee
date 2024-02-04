@@ -8,14 +8,14 @@ import lombok.Getter;
 
 public class ApiConfiguration {
 
+  public ApiConfiguration() {
+    super();
+  }
+
   @Getter
   @Valid
   @NotNull
   @JsonProperty("url")
   private String url;
-
-  public ApiConfiguration() {
-    super();
-  }
 
 }
