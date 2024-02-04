@@ -26,4 +26,5 @@ public class Employee {
 
   @Pattern(regexp = ".+@.+\\.[a-z]+")
   private String email;
+
 }

@@ -51,4 +51,5 @@ public class ApplicationConfiguration extends Configuration {
   public String getApiUrl() {
     return api.getUrl();
   }
+
 }

@@ -29,4 +29,5 @@ public class User implements Principal {
   public Set<String> getRoles() {
     return roles;
   }
+
 }

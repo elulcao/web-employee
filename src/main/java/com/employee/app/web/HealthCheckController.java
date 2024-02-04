@@ -25,4 +25,5 @@ public class HealthCheckController {
   public Set<Entry<String, Result>> getStatus() {
     return registry.runHealthChecks().entrySet();
   }
+
 }

@@ -3,11 +3,9 @@ package com.employee.app.authorization;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
-
 import com.employee.app.resources.Constants;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
-
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
@@ -27,4 +25,5 @@ public class AppBasicAuthenticator implements Authenticator<BasicCredentials, Us
     }
     return Optional.empty();
   }
+
 }

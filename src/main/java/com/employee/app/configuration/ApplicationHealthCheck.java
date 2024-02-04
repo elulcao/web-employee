@@ -50,4 +50,5 @@ public class ApplicationHealthCheck extends HealthCheck {
       return Result.unhealthy("Exception: " + e.getMessage());
     }
   }
+
 }

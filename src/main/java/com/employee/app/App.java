@@ -36,21 +36,39 @@ public class App extends Application<ApplicationConfiguration> {
   @Override
   public void run(ApplicationConfiguration configuration, Environment environment)
       throws Exception {
+    Client client = registerJerseyClient(configuration, environment);
+    registerRestResources(environment);
+    registerApplicationHealthCheck(configuration, environment, client);
+    registerDropwizardSecurity(environment);
+  }
 
+  public static void main(String[] args) throws Exception {
+    new App().run(args);
+  }
+
+  public Client registerJerseyClient(ApplicationConfiguration configuration,
+      Environment environment) {
     LOGGER.info("Registering Jersey Client");
     final Client client = new JerseyClientBuilder(environment)
         .using(configuration.getJerseyClientConfiguration()).build(getName());
     environment.jersey().register(new APIController(configuration, client));
+    return client;
+  }
 
+  public void registerRestResources(Environment environment) {
     LOGGER.info("Registering REST resources");
     environment.jersey()
         .register(new EmployeeController(environment.getValidator(), new EmployeeRepository()));
+  }
 
+  public void registerApplicationHealthCheck(ApplicationConfiguration configuration,
+      Environment environment, Client client) {
     LOGGER.info("Registering Application Health Check");
     environment.healthChecks().register("application",
         new ApplicationHealthCheck(configuration, client));
+  }
 
-    // ****** Dropwizard security - custom classes ***********/
+  public void registerDropwizardSecurity(Environment environment) {
     LOGGER.info("Registering Dropwizard security");
     environment.jersey()
         .register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<User>()
@@ -60,7 +78,4 @@ public class App extends Application<ApplicationConfiguration> {
     environment.jersey().register(new AuthValueFactoryProvider.Binder<>(User.class));
   }
 
-  public static void main(String[] args) throws Exception {
-    new App().run(args);
-  }
 }
