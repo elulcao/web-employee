@@ -1,8 +1,6 @@
 package com.employee.app.model;
 
-import org.checkerframework.common.value.qual.IntRangeFromPositive;
 import org.hibernate.validator.constraints.Length;
-
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;

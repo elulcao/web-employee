@@ -36,9 +36,8 @@ public class App extends Application<ApplicationConfiguration> {
   @Override
   public void run(ApplicationConfiguration configuration, Environment environment)
       throws Exception {
-    Client client = registerJerseyClient(configuration, environment);
     registerRestResources(environment);
-    registerApplicationHealthCheck(configuration, environment, client);
+    registerApplicationHealthCheck(configuration, environment);
     registerDropwizardSecurity(environment);
   }
 
@@ -62,8 +61,9 @@ public class App extends Application<ApplicationConfiguration> {
   }
 
   public void registerApplicationHealthCheck(ApplicationConfiguration configuration,
-      Environment environment, Client client) {
+      Environment environment) {
     LOGGER.info("Registering Application Health Check");
+    Client client = registerJerseyClient(configuration, environment);
     environment.healthChecks().register("application",
         new ApplicationHealthCheck(configuration, client));
   }
