@@ -1,6 +1,8 @@
 package com.employee.app.model;
 
 import org.hibernate.validator.constraints.Length;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -13,7 +15,8 @@ import lombok.NoArgsConstructor;
 public class Employee {
 
   @NotNull
-  @Pattern(regexp = "[0-9]+")
+  @Min(1)
+  @Max(Integer.MAX_VALUE)
   private Integer id;
 
   @NotNull

@@ -32,7 +32,7 @@ public class EmployeeRepository {
   }
 
   public void addEmployee(Employee employee) {
-    employees.put(employees.size() + 1, employee);
+    employees.put(employee.getId(), employee);
   }
 
 }

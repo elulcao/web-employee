@@ -6,10 +6,14 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import com.employee.app.model.Employee;
-
+import jakarta.validation.Validator;
 
 public class EmployeeRepositoryTest {
+
+  @Mock
+  private Validator validator;
 
   private EmployeeRepository employeeRepository;
 
@@ -62,4 +66,5 @@ public class EmployeeRepositoryTest {
     assertEquals(employee.getLastName(), addedEmployee.getLastName());
     assertEquals(employee.getEmail(), addedEmployee.getEmail());
   }
+
 }
